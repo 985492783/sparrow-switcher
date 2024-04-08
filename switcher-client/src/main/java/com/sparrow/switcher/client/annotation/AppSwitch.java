@@ -1,4 +1,4 @@
-package com.sparrow.switcher.client;
+package com.sparrow.switcher.client.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
