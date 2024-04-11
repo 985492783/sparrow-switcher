@@ -6,4 +6,21 @@ package com.sparrow.switcher.client.exception;
  */
 public class SwitchException extends RuntimeException {
 
+    private int errCode;
+    
+    private String errMsg;
+    
+    public SwitchException(int errCode, String errMsg) {
+        this.errCode = errCode;
+        this.errMsg = errMsg;
+    }
+    
+    public int getErrCode() {
+        return errCode;
+    }
+    
+    public String getErrMsg() {
+        return errMsg;
+    }
+    
 }
