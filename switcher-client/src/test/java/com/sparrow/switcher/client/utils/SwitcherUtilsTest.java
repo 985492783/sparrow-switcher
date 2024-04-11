@@ -2,7 +2,6 @@ package com.sparrow.switcher.client.utils;
 
 import com.sparrow.switcher.client.SwitcherManager;
 import com.sparrow.switcher.client.annotation.AppSwitch;
-import com.sparrow.switcher.common.entity.AppSwitchItem;
 import org.junit.Assert;
 import org.junit.Test;
 
