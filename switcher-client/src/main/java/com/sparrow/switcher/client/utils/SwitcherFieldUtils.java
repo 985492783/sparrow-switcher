@@ -1,16 +1,19 @@
 package com.sparrow.switcher.client.utils;
 
+import com.alibaba.fastjson2.JSON;
 import com.sparrow.switcher.client.exception.SwitchException;
 import com.sparrow.switcher.common.entity.AppSwitchItem;
+import com.sparrow.switcher.common.enums.ErrorCodeEnums;
 import com.sparrow.switcher.common.enums.FieldTypeEnums;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 
 /**
  * @author 985492783@qq.com
  * @date 2024/4/11 14:05
  */
-public class SwitcherUtils {
+public class SwitcherFieldUtils {
     
     
     public static AppSwitchItem createSwitchItem(Field field) throws SwitchException {
@@ -29,4 +32,17 @@ public class SwitcherUtils {
         }
         return switchItem;
     }
+    
+    /**
+     * json数值赋给field
+     */
+    public static void setField(Field field, String json) throws SwitchException {
+        try {
+            Type genericType = field.getGenericType();
+            field.set(null, JSON.parseObject(json, genericType));
+        } catch (Exception e) {
+            throw new SwitchException(ErrorCodeEnums.SYSTEM_ERROR.getCode(), "parse object failed");
+        }
+    }
+    
 }

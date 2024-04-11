@@ -7,4 +7,7 @@ package com.sparrow.switcher.common.remote;
 public interface RpcClient {
     
     void connect();
+    
+    boolean isOpen();
+    
 }

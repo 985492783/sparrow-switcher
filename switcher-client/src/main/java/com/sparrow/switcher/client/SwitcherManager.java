@@ -3,7 +3,7 @@ package com.sparrow.switcher.client;
 import com.alibaba.fastjson2.JSON;
 import com.sparrow.switcher.client.annotation.AppSwitch;
 import com.sparrow.switcher.client.exception.SwitchException;
-import com.sparrow.switcher.client.utils.SwitcherUtils;
+import com.sparrow.switcher.client.utils.SwitcherFieldUtils;
 import com.sparrow.switcher.common.entity.AppSwitchItem;
 import com.sparrow.switcher.common.enums.ErrorCodeEnums;
 
@@ -39,9 +39,10 @@ public class SwitcherManager {
         List<AppSwitchItem> list = new ArrayList<>();
         for (Field field : fields) {
             boolean isStatic = Modifier.isStatic(field.getModifiers());
+            boolean isFinal = Modifier.isFinal(field.getModifiers());
             AppSwitch appSwitch;
-            if (isStatic && (appSwitch = field.getAnnotation(AppSwitch.class)) != null) {
-                AppSwitchItem switchItem = SwitcherUtils.createSwitchItem(field);
+            if (isStatic && !isFinal && (appSwitch = field.getAnnotation(AppSwitch.class)) != null) {
+                AppSwitchItem switchItem = SwitcherFieldUtils.createSwitchItem(field);
                 switchItem.setDesc(appSwitch.desc());
                 field.setAccessible(true);
                 try {
@@ -60,6 +61,6 @@ public class SwitcherManager {
         fieldMap.put(clazz, map);
         //TODO 注册并将初始化值拉回来
         System.out.println(list);
-        //TODO 将真实值透还给原对象
+        //TODO 将真实值透还给原对象 SwitcherFieldUtils.setField()
     }
 }
