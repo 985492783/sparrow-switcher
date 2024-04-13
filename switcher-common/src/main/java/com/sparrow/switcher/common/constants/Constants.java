@@ -9,4 +9,7 @@ public class Constants {
     public static final String DATASOURCE_TYPE = "sparrow.switcher.storage.type";
     
     public static final String DATASOURCE_URL = "sparrow.switcher.storage.url";
+
+    public static final String INTERNAL_MODULE = "internal";
+
 }
