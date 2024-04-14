@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option java_package = "com.sparrow.switcher.common.grpc.auto";
+option java_outer_classname = "TestProto";
+
+service TestGRPC {
+  rpc GetVersion (GetVersionRequest) returns (GetVersionResponse);
+}
+
+message BaseResponse {
+  int32 code = 1;         // 错误码 0:成功; 其他：参考《错误码统计》
+  string message = 2;     // 错误消息
+}
+
+/*
+ ** 版本信息
+ */
+message Version {
+  string software_version = 1;    // 软件版本号
+  int64 last_compile_time = 2;    // 上次编译时间
+}
+
+message GetVersionRequest {
+}
+
+message GetVersionResponse {
+  BaseResponse response = 1;
+  Version version = 2;
+}
