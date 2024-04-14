@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option java_package = "io.grpc.examples.test";
+option java_package = "com.sparrow.switcher.common.grpc.auto";
 option java_outer_classname = "TestProto";
 
 service TestGRPC {
