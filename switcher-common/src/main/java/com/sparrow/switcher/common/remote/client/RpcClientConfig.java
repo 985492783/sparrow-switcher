@@ -21,7 +21,7 @@ import java.util.Map;
 /**
  * RpcClientConfig.
  *
- * @author karsonto
+ * @author pixel-revolve
  */
 public interface RpcClientConfig {
     

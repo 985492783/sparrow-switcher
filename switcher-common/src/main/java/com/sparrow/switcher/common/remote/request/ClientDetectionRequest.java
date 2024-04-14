@@ -21,8 +21,7 @@ import static com.sparrow.switcher.common.constants.Constants.INTERNAL_MODULE;
 /**
  * client active detection request from server.
  *
- * @author liuzunfei
- * @version $Id: ClientDetectionRequest.java, v 0.1 2021年01月20日 2:42 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public class ClientDetectionRequest extends ServerRequest {
     

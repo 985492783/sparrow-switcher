@@ -22,8 +22,7 @@ import com.sparrow.switcher.common.remote.response.Response;
 /**
  * ServerRequestHandler, to process the request from server side.
  *
- * @author liuzunfei
- * @version $Id: ServerRequestHandler.java, v 0.1 2020年07月14日 11:41 AM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public interface ServerRequestHandler {
     

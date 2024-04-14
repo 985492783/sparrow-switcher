@@ -19,8 +19,7 @@ package com.sparrow.switcher.common.remote.response;
 /**
  * response of client active detection check.
  *
- * @author liuzunfei
- * @version $Id: ServerCheckResponse.java, v 0.1 2021年01月20日 10:37 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public class ClientDetectionResponse extends Response {
 

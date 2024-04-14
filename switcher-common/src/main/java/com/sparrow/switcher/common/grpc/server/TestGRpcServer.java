@@ -4,10 +4,10 @@ import java.io.IOException;
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 
-public class GRpcServer {
+public class TestGRpcServer {
     private Server server;
     public static void main(String[] args) {
-        final GRpcServer server = new GRpcServer();
+        final TestGRpcServer server = new TestGRpcServer();
         try {
             server.start();
         } catch (IOException e) {

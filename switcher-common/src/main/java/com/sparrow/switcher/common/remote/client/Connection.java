@@ -25,8 +25,7 @@ import java.util.Map;
 /**
  * connection on client side.
  *
- * @author liuzunfei
- * @version $Id: Connection.java, v 0.1 2020年08月09日 1:32 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 @SuppressWarnings("PMD.AbstractClassShouldStartWithAbstractNamingRule")
 public abstract class Connection implements Requester {

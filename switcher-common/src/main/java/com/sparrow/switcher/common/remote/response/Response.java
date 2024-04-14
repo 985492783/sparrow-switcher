@@ -21,8 +21,7 @@ import com.sparrow.switcher.common.remote.Payload;
 /**
  * abstract response model via rpc channel.
  *
- * @author liuzunfei
- * @version $Id: Response.java, v 0.1 2020年07月13日 6:03 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 @SuppressWarnings("PMD.AbstractClassShouldStartWithAbstractNamingRule")
 public abstract class Response implements Payload {

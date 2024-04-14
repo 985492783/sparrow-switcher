@@ -19,8 +19,7 @@ package com.sparrow.switcher.common.remote.client;
 /**
  * status of rpc client.
  *
- * @author liuzunfei
- * @version $Id: RpcClientStatus.java, v 0.1 2020年07月14日 3:49 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public enum RpcClientStatus {
     

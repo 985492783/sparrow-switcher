@@ -19,7 +19,7 @@ package com.sparrow.switcher.common.remote;
 /**
  * payload class sign.
  *
- * @author hujun
+ * @author pixel-revolve
  */
 public interface Payload {
 

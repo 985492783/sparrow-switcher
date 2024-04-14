@@ -7,7 +7,7 @@
  * License.
  */
 
-package com.sparrow.switcher.common.remote.utils;
+package com.sparrow.switcher.common.utils;
 
 import java.util.regex.Pattern;
 

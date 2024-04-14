@@ -21,8 +21,7 @@ import static com.sparrow.switcher.common.constants.Constants.INTERNAL_MODULE;
 /**
  * ConnectResetRequest.
  *
- * @author liuzunfei
- * @version $Id: ConnectResetRequest.java, v 0.1 2020年07月15日 11:11 AM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public class ConnectResetRequest extends ServerRequest {
     

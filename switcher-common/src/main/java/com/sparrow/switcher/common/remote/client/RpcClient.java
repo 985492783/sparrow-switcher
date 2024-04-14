@@ -18,6 +18,7 @@ package com.sparrow.switcher.common.remote.client;
 
 import com.sparrow.switcher.common.remote.Closeable;
 import com.sparrow.switcher.common.remote.ConnectionType;
+import com.sparrow.switcher.common.remote.PayloadRegistry;
 import com.sparrow.switcher.common.remote.exception.SparrowException;
 import com.sparrow.switcher.common.remote.request.ClientDetectionRequest;
 import com.sparrow.switcher.common.remote.request.ConnectResetRequest;
@@ -25,7 +26,7 @@ import com.sparrow.switcher.common.remote.request.Request;
 import com.sparrow.switcher.common.remote.response.ClientDetectionResponse;
 import com.sparrow.switcher.common.remote.response.ConnectResetResponse;
 import com.sparrow.switcher.common.remote.response.Response;
-import com.sparrow.switcher.common.remote.utils.*;
+import com.sparrow.switcher.common.utils.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,9 +39,14 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * RPC Client.
+ *
+ * @author pixel-revolve
+ */
 public abstract class RpcClient implements Closeable {
-    
-    private static final Logger LOGGER = LoggerFactory.getLogger("com.alibaba.nacos.common.remote.client");
+
+    private static final Logger LOGGER = LoggerFactory.getLogger("com.sparrow.switcher.common.remote.client");
 
     private ServerListFactory serverListFactory;
 
@@ -57,10 +63,16 @@ public abstract class RpcClient implements Closeable {
 
     private static final Pattern EXCLUDE_PROTOCOL_PATTERN = Pattern.compile("(?<=\\w{1,5}://)(.*)");
 
+    private long lastActiveTimeStamp = System.currentTimeMillis();
+
     /**
      * handlers to
      */
     protected List<ServerRequestHandler> serverRequestHandlers = new ArrayList<>();
+
+    static {
+        PayloadRegistry.init();
+    }
 
     public RpcClient(RpcClientConfig rpcClientConfig) {
         this(rpcClientConfig, null);
@@ -82,6 +94,7 @@ public abstract class RpcClient implements Closeable {
 
     /**
      * Start this client
+     *
      * @throws SparrowException
      */
     public final void start() throws SparrowException {
@@ -234,21 +247,45 @@ public abstract class RpcClient implements Closeable {
         this.serverRequestHandlers.add(serverRequestHandler);
     }
 
-    public static class ServerInfo {
-        
-        protected String serverIp;
-        
-        protected int serverPort;
-        
-        public ServerInfo() {
-        
+    protected Response handleServerRequest(final Request request) {
+
+        LoggerUtils.printIfInfoEnabled(LOGGER, "[{}] Receive server push request, request = {}, requestId = {}",
+                rpcClientConfig.name(), request.getClass().getSimpleName(), request.getRequestId());
+        lastActiveTimeStamp = System.currentTimeMillis();
+        for (ServerRequestHandler serverRequestHandler : serverRequestHandlers) {
+            try {
+                Response response = serverRequestHandler.requestReply(request, currentConnection);
+
+                if (response != null) {
+                    LoggerUtils.printIfInfoEnabled(LOGGER, "[{}] Ack server push request, request = {}, requestId = {}",
+                            rpcClientConfig.name(), request.getClass().getSimpleName(), request.getRequestId());
+                    return response;
+                }
+            } catch (Exception e) {
+                LoggerUtils.printIfInfoEnabled(LOGGER, "[{}] HandleServerRequest:{}, errorMessage = {}",
+                        rpcClientConfig.name(), serverRequestHandler.getClass().getName(), e.getMessage());
+                throw e;
+            }
+
         }
-        
+        return null;
+    }
+
+    public static class ServerInfo {
+
+        protected String serverIp;
+
+        protected int serverPort;
+
+        public ServerInfo() {
+
+        }
+
         public ServerInfo(String serverIp, int serverPort) {
             this.serverPort = serverPort;
             this.serverIp = serverIp;
         }
-        
+
         /**
          * get address, ip:port.
          *
@@ -257,7 +294,7 @@ public abstract class RpcClient implements Closeable {
         public String getAddress() {
             return serverIp + ":" + serverPort;
         }
-        
+
         /**
          * Setter method for property <tt>serverIp</tt>.
          *
@@ -266,7 +303,7 @@ public abstract class RpcClient implements Closeable {
         public void setServerIp(String serverIp) {
             this.serverIp = serverIp;
         }
-        
+
         /**
          * Setter method for property <tt>serverPort</tt>.
          *
@@ -275,7 +312,7 @@ public abstract class RpcClient implements Closeable {
         public void setServerPort(int serverPort) {
             this.serverPort = serverPort;
         }
-        
+
         /**
          * Getter method for property <tt>serverIp</tt>.
          *
@@ -284,7 +321,7 @@ public abstract class RpcClient implements Closeable {
         public String getServerIp() {
             return serverIp;
         }
-        
+
         /**
          * Getter method for property <tt>serverPort</tt>.
          *
@@ -293,46 +330,46 @@ public abstract class RpcClient implements Closeable {
         public int getServerPort() {
             return serverPort;
         }
-        
+
         @Override
         public String toString() {
             return "{serverIp = '" + serverIp + '\'' + ", server main port = " + serverPort + '}';
         }
     }
-    
+
     public static class ConnectionEvent {
-        
+
         public static final int CONNECTED = 1;
-        
+
         public static final int DISCONNECTED = 0;
-        
+
         int eventType;
-        
+
         Connection connection;
-        
+
         public ConnectionEvent(int eventType, Connection connection) {
             this.eventType = eventType;
             this.connection = connection;
         }
-        
+
         public boolean isConnected() {
             return eventType == CONNECTED;
         }
-        
+
         public boolean isDisConnected() {
             return eventType == DISCONNECTED;
         }
     }
 
     static class ReconnectContext {
-        
+
         public ReconnectContext(ServerInfo serverInfo, boolean onRequestFail) {
             this.onRequestFail = onRequestFail;
             this.serverInfo = serverInfo;
         }
-        
+
         boolean onRequestFail;
-        
+
         ServerInfo serverInfo;
     }
 

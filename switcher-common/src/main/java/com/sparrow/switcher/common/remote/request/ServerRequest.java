@@ -19,8 +19,7 @@ package com.sparrow.switcher.common.remote.request;
 /**
  * ServerPushResponse.
  *
- * @author liuzunfei
- * @version $Id: ServerPushResponse.java, v 0.1 2020年07月20日 1:21 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 @SuppressWarnings("PMD.AbstractClassShouldStartWithAbstractNamingRule")
 public abstract class ServerRequest extends Request {

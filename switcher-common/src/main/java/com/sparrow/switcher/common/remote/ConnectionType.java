@@ -19,8 +19,7 @@ package com.sparrow.switcher.common.remote;
 /**
  * ConnectionType.
  *
- * @author liuzunfei
- * @version $Id: ConnectionType.java, v 0.1 2020年07月13日 7:15 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public enum ConnectionType {
     

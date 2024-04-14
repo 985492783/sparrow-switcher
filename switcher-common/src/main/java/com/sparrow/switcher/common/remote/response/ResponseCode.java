@@ -19,8 +19,7 @@ package com.sparrow.switcher.common.remote.response;
 /**
  * ResponseCode.
  *
- * @author liuzunfei
- * @version $Id: ResponseCode.java, v 0.1 2020年07月14日 2:04 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public enum ResponseCode {
     

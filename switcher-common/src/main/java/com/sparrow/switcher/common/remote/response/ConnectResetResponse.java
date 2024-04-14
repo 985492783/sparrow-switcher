@@ -19,8 +19,7 @@ package com.sparrow.switcher.common.remote.response;
 /**
  * connection reset response.
  *
- * @author liuzunfei
- * @version $Id: ConnectResetResponse.java, v 0.1 2020年09月01日 2:43 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public class ConnectResetResponse extends Response {
     

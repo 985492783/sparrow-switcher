@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * Ability key constant. It is used to constrain the ability key.<br/>
  * <strong>Ensure that return value of {@link AbilityKey#getName()} is unique under one specify {@link AbilityMode}</strong>.
  *
- * @author Daydreamer
+ * @author pixel-revolve
  * @date 2022/8/31 12:27
  **/
 public enum AbilityKey {

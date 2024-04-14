@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.sparrow.switcher.common.remote.utils;
+package com.sparrow.switcher.common.utils;
 
 /**
  * Number utils.

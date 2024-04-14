@@ -16,12 +16,12 @@
 
 package com.sparrow.switcher.common.remote.exception;
 
-import com.sparrow.switcher.common.remote.utils.StringUtils;
+import com.sparrow.switcher.common.utils.StringUtils;
 
 /**
- * Nacos Exception.
+ * Sparrow Exception.
  *
- * @author Nacos
+ * @author pixel-revolve
  */
 public class SparrowException extends Exception {
 
@@ -180,7 +180,7 @@ public class SparrowException extends Exception {
     public static final int RESOURCE_NOT_FOUND = -404;
     
     /**
-     * http client error code, ome exceptions that occurred when there use the Nacos RestTemplate and Nacos
+     * http client error code, ome exceptions that occurred when there use the Sparrow RestTemplate and Sparrow
      * AsyncRestTemplate.
      */
     public static final int HTTP_CLIENT_ERROR_CODE = -500;

@@ -5,18 +5,18 @@ import io.grpc.ManagedChannelBuilder;
 import com.sparrow.switcher.common.grpc.auto.TestGRPCGrpc;
 import com.sparrow.switcher.common.grpc.auto.TestProto;
 
-public class GRpcClient {
+public class TestGRpcClient {
     private final ManagedChannel channel;
     private final TestGRPCGrpc.TestGRPCBlockingStub blockingStub;
 
-    static GRpcClient client;
+    static TestGRpcClient client;
     public static void main(String[] args) {
-        client = new GRpcClient("127.0.0.1", 800);
+        client = new TestGRpcClient("127.0.0.1", 800);
 
         client.GetVersion();
     }
 
-    public GRpcClient(String host, int port) {
+    public TestGRpcClient(String host, int port) {
         channel = ManagedChannelBuilder.forAddress(host, port)
                 .usePlaintext()
                 .build();

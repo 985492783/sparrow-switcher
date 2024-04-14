@@ -19,7 +19,7 @@ package com.sparrow.switcher.common.remote.constants;
 /**
  * Ability mode.
  *
- * @author Daydreamer
+ * @author pixel-revolve
  * @date 2023/9/25 12:32
  **/
 public enum AbilityMode {

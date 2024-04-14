@@ -18,18 +18,37 @@ package com.sparrow.switcher.common.remote;
 
 import com.sparrow.switcher.common.remote.exception.SparrowException;
 import com.sparrow.switcher.common.remote.request.Request;
+import com.sparrow.switcher.common.remote.request.RequestCallBack;
+import com.sparrow.switcher.common.remote.request.RequestFuture;
 import com.sparrow.switcher.common.remote.response.Response;
 
 /**
  * connection interface,define basic operation.
  *
- * @author liuzunfei
- * @version $Id: Requester.java, v 0.1 2020年09月11日 4:05 PM liuzunfei Exp $
+ * @author pixel-revolve
  */
 public interface Requester {
     
 
     Response request(Request request, long timeoutMills) throws SparrowException;
+
+    /**
+     * send request.
+     *
+     * @param request request.
+     * @return request future.
+     * @throws SparrowException exception throw.
+     */
+    RequestFuture requestFuture(Request request) throws SparrowException;
+
+    /**
+     * send async request.
+     *
+     * @param request         request.
+     * @param requestCallBack callback of request.
+     * @throws SparrowException exception throw.
+     */
+    void asyncRequest(Request request, RequestCallBack requestCallBack) throws SparrowException;
 
     /**
      * close connection.

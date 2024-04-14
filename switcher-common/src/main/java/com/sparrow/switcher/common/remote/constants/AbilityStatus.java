@@ -17,7 +17,7 @@
 package com.sparrow.switcher.common.remote.constants;
 
 /**.
- * @author Daydreamer
+ * @author pixel-revolve
  * @description It is used to know a certain ability whether supporting.
  * @date 2022/8/31 12:27
  **/
